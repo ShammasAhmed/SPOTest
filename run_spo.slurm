@@ -1,5 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=spo_trials
+#SBATCH --account=guptavis_1305
 #SBATCH --output=logs/spo_%A_%a.out
 #SBATCH --error=logs/spo_%A_%a.err
 #SBATCH --array=0-499%20

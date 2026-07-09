@@ -1,5 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=spo_plot
+#SBATCH --account=guptavis_1305
 #SBATCH --output=logs/plot_%j.out
 #SBATCH --error=logs/plot_%j.err
 #SBATCH --ntasks=1
