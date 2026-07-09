@@ -28,9 +28,16 @@ set -euo pipefail
 mkdir -p logs results
 
 # --- Environment ---------------------------------------------------------
-# Adjust these two lines to your cluster (module name / conda env).
-# module load python/3.13
-# source activate spo   # or: source venv/bin/activate
+# Activate the venv provisioned by submit.sh. This is what was missing before:
+# without it the job ran the bare system python and crashed with
+# "ModuleNotFoundError: No module named 'numpy'".
+# module load python/3.11   # uncomment / adjust if your cluster needs it
+if [ ! -d venv ]; then
+    echo "ERROR: venv/ not found. Create it first (bash submit.sh, or:" >&2
+    echo "       python3 -m venv venv && ./venv/bin/pip install -r requirements.txt)" >&2
+    exit 1
+fi
+source venv/bin/activate
 
 python --version
 

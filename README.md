@@ -22,8 +22,10 @@ records the normalized operational regret (%) for each method.
 
 ## Running on the cluster
 
-Edit the environment lines (`module load` / `conda`/`venv`) near the top of both
-`.slurm` files, then:
+`submit.sh` builds a local `venv/` and installs `requirements.txt` once (on the
+login node), then both `.slurm` files activate it. If your cluster hides `python3`
+behind a module, uncomment the `module load` line near the top of `submit.sh` and
+both `.slurm` files. Then:
 
 ```bash
 bash submit.sh
@@ -33,9 +35,10 @@ This submits the 500-task array (max **20** running at once, per the `%20` cap) 
 a plot job that fires automatically once every trial succeeds. Results land in
 `figures/regret_boxplot_noisy.png` and `figures/regret_boxplot_noiseless.png`.
 
-To submit manually instead:
+To submit manually instead (create the venv first — the `.slurm` files require it):
 
 ```bash
+python3 -m venv venv && ./venv/bin/pip install -r requirements.txt
 jid=$(sbatch --parsable run_spo.slurm)
 sbatch --dependency=afterok:${jid} plot.slurm
 ```

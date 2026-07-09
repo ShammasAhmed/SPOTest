@@ -19,7 +19,13 @@ set -euo pipefail
 
 mkdir -p logs figures
 
-# module load python/3.13
-# source activate spo
+# Activate the same venv the trial array used (provisioned by submit.sh).
+# module load python/3.11   # uncomment / adjust if your cluster needs it
+if [ ! -d venv ]; then
+    echo "ERROR: venv/ not found. Create it first (bash submit.sh, or:" >&2
+    echo "       python3 -m venv venv && ./venv/bin/pip install -r requirements.txt)" >&2
+    exit 1
+fi
+source venv/bin/activate
 
 srun python aggregate_plot.py
