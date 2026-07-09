@@ -21,7 +21,7 @@ set -euo pipefail
 mkdir -p logs figures
 
 # Activate the same venv the trial array used (provisioned by submit.sh).
-# module load python/3.11   # uncomment / adjust if your cluster needs it
+module load python/3.11   # same module used to build the venv in submit.sh
 if [ ! -d venv ]; then
     echo "ERROR: venv/ not found. Create it first (bash submit.sh, or:" >&2
     echo "       python3 -m venv venv && ./venv/bin/pip install -r requirements.txt)" >&2

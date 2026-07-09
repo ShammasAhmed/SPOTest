@@ -6,7 +6,7 @@ set -euo pipefail
 # The array tasks and the plot job all activate this venv (see the .slurm files).
 # Building it here (instead of inside each task) avoids a 20-way race from the
 # concurrently-running array tasks and the earlier "No module named 'numpy'" crash.
-# module load python/3.11   # uncomment / adjust if `python3` isn't on PATH by default
+module load python/3.11   # needed so `python3` is 3.11, not the broken system 3.6
 if [ ! -d venv ]; then
     echo "creating venv and installing requirements ..."
     python3 -m venv venv

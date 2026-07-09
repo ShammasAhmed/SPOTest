@@ -32,7 +32,7 @@ mkdir -p logs results
 # Activate the venv provisioned by submit.sh. This is what was missing before:
 # without it the job ran the bare system python and crashed with
 # "ModuleNotFoundError: No module named 'numpy'".
-# module load python/3.11   # uncomment / adjust if your cluster needs it
+module load python/3.11   # same module used to build the venv in submit.sh
 if [ ! -d venv ]; then
     echo "ERROR: venv/ not found. Create it first (bash submit.sh, or:" >&2
     echo "       python3 -m venv venv && ./venv/bin/pip install -r requirements.txt)" >&2
